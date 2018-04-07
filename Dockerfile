@@ -10,7 +10,8 @@ LABEL io.k8s.description="Platform for building and running Spring Boot applicat
 # Install prepare infrastructure
 RUN yum -y update && \
  yum -y install wget && \
- yum -y install tar
+ yum -y install tar && \
+ yum -y install sudo
 
 # Prepare environment 
 ENV JAVA_HOME /opt/java
@@ -27,6 +28,12 @@ RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=acc
  tar -xvf jdk-${JAVA_VERSION}-linux-x64.tar.gz && \
  rm jdk*.tar.gz && \
  mv jdk* ${JAVA_HOME}
+
+ENV MAVEN_HOME /usr/share/maven
+
+RUN curl -fsSL https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar xzf - -C /usr/share \
+  && mv /usr/share/apache-maven-$MAVEN_VERSION /usr/share/maven \
+  && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 
 
 # Install Tomcat
