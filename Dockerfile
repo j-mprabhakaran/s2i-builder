@@ -65,7 +65,9 @@ WORKDIR /opt/tomcat
 EXPOSE 8080
 EXPOSE 8009
 
-USER tomcat
+RUN chown -R 1001:0 /opt/app-root
+USER 1001
+# USER tomcat
 # CMD ["tomcat.sh"]
 
 CMD $STI_SCRIPTS_PATH/usage
