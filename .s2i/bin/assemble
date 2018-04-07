@@ -1,5 +1,5 @@
-sudo cp -Rf /tmp/src/. /opt/app-root/
+cp -Rf /tmp/src/. /opt/app-root/
 cd /opt/app-root/
 mvn clean package
-sudo cp -Rf /opt/app-root/target/*.war $CATALINA_HOME/webapps
-sudo cp -Rf /opt/app-root/*.war $CATALINA_HOME/webapps
+cp -Rf /opt/app-root/target/*.war $CATALINA_HOME/webapps
+cp -Rf /opt/app-root/*.war $CATALINA_HOME/webapps
