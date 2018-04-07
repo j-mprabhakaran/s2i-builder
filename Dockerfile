@@ -56,7 +56,8 @@ RUN chmod +x $CATALINA_HOME/scripts/*.sh
 # Create tomcat user
 RUN groupadd -r tomcat && \
  useradd -g tomcat -d ${CATALINA_HOME} -s /sbin/nologin  -c "Tomcat user" tomcat && \
- chown -R tomcat:tomcat ${CATALINA_HOME}
+ chown -R tomcat:tomcat ${CATALINA_HOME} && \
+ chmod -R 777 /opt/tomcat 
 
 COPY ./.s2i/bin/ /usr/libexec/s2i
 
@@ -65,8 +66,8 @@ WORKDIR /opt/tomcat
 EXPOSE 8080
 EXPOSE 8009
 
-RUN chown -R 1001:0 /opt/app-root
-USER 1001
+RUN chown -R tomcat:0 /opt/app-root
+USER tomcat
 # USER tomcat
 # CMD ["tomcat.sh"]
 
