@@ -6,8 +6,9 @@ if [ -f /.tomcat_admin_created ]; then
 fi
 			
 #generate password
-PASS=${TOMCAT_PASS:-$(cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 10| head -n 1)}
-_word=$( [ ${TOMCAT_PASS} ] && echo "preset" || echo "random" )
+#PASS=${TOMCAT_PASS:-$(cat /dev/urandom| tr -dc 'a-zA-Z0-9' | fold -w 10| head -n 1)}
+#_word=$( [ ${TOMCAT_PASS} ] && echo "preset" || echo "random" )
+PASS="admin"
 
 echo "=> Creating and admin user with a ${_word} password in Tomcat"
 sed -i -r 's/<\/tomcat-users>//' ${CATALINA_HOME}/conf/tomcat-users.xml
